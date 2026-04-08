@@ -1,0 +1,23 @@
+What was the main principle or heuristic you used to decide on each query point (e.g. exploitation of high outputs, exploration of uncertain regions, diversity of samples)?
+
+Since we’re in the early stages, my general strategy is to pursue an exploratory approach, sampling areas of high uncertainty. I used GP-UCB across most of my functions to explore regions of high uncertainty for potential positive peaks.
+
+For lower-dimensional functions (functions 1-3), it’s much easier to visualise the Gaussian processes’ predicted mean surface μ(x), its’ uncertainty σ(x) and the acquisition surface a(x) = μ(x) + βσ(x), using heat maps for instance. 
+
+For the higher-dimensional functions (functions 7-8) I used an ExtraTrees surrogate instead of a GP where the predictive mean comes from the average of tree predictions. This enables UCB/EI-style exploration without assuming smoothness.
+
+Which function(s) were most challenging to query, and why? What additional information would have helped you?
+
+For Function 4, I compared EI vs UCB, and while EI looked promising, I chose UCB this week to map an under-explored region. Next week I’ll either exploit around any improvement, or fall back to the EI region if this probe is poor.”
+For Function 5 I log-transformed the y outputs because the outputs spanned a huge range (a few values are significantly larger than the rest). I tested UCB sensitivity to β: at β=1.0 the chosen point changed, and at β=1.5 it flipped to a different high-uncertainty corner, indicating the UCB optimum is not stable. EI was stable and predicted a higher mean improvement, so I chose a moderate-β UCB to balance learning with likelihood of gain.
+Naturally the functions in higher-dimensions were much harder to build an intuition around and visualise. 
+Information that would have helped:
+Structure hints: Even high-level priors like “smooth vs rugged” or “one dominant optimum vs many” would heavily inform my approach around optimising the hyperparameters for these Gaussian processes, for instance, giving a strong indication how aggressive UCB should be.
+Performance scale expectations: For functions like 5, it would help to know whether extreme outputs are expected or represent rare outliers.
+Evaluation cost asymmetry: If some functions are more expensive or noisy than others, that would justify different acquisition aggressiveness across functions.
+
+How do you plan to adjust your strategy in future rounds based on the current performance or uncertainty levels?
+
+In low dimensions it’s easier to detect when we’re converging because we can visualise and because good regions tend to emerge clearly. If the best value stops improving over successive rounds, or if UCB keeps selecting points with high uncertainty but low predicted mean, I’ll switch from UCB to EI and do local refinement around the current best.
+In higher dimensions, exploration remains valuable for longer because the space is huge and local search can overfit prematurely. However, I’ll try stop UCB being driven purely by uncertainty: tracking minimum distance to existing data for the chosen candidate (avoid “too far from everything” points unless deliberately exploring).
+Generally if UCB and EI agree, that’s a strong sign the candidate has both upside and informational value.
