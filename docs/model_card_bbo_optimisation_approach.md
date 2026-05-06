@@ -22,15 +22,6 @@ It should take:
 
 The expected input is a per-function history with columns `x0`-`xk` and `y0`. The expected output is a portal-formatted candidate string plus supporting report tables and diagnostics.
 
-Use cases to avoid include:
-
-- treating the pipeline as a generic optimiser for arbitrary domains without rescaling;
-- applying it to constrained or categorical search spaces without modification;
-- interpreting it as a classifier, regressor, or fairness-sensitive human-decision model;
-- claiming guaranteed global optimality from the returned suggestions.
-
-The valid application scope is therefore fairly narrow: small-to-moderate-dimensional continuous capstone functions, chosen one query at a time, with heavy emphasis on robustness and auditability.
-
 ## Approach Details
 
 ### Core pipeline
@@ -64,7 +55,7 @@ The live code path in [`weekly_pack.py`](../weekly_pack.py) runs the following p
 
 ### Surrogate modelling choices
 
-The modelling layer is best understood as “preferred configuration plus robust fallback chain,” not as one fixed model. The preferred path is:
+The preferred path is:
 
 - transformed target;
 - input warp;
@@ -73,7 +64,7 @@ The modelling layer is best understood as “preferred configuration plus robust
 
 ### Selection logic and exploration/exploitation trade-off
 
-The primary selector still reflects my older CapstoneBO philosophy: compute a Pareto front over `(-EI, -PI, -UCB)`, apply a sigma quantile gate that becomes less strict with more observations, then tie-break by posterior mean. That is the `primary_pareto_sigma` branch.
+The primary selector still reflects my older CapstoneBO philosophy. This involves computing a Pareto front over `(-EI, -PI, -UCB)`, apply a sigma quantile gate that becomes less strict with more observations, then tie-break by posterior mean. That is the `primary_pareto_sigma` branch.
 
 CapstoneBO+ includes two important alternatives:
 
@@ -88,32 +79,29 @@ where `novelty_ratio` is the distance to the nearest observed point divided by t
 
 ## Performance
 
-Using the current raw data:
+Using the current raw CSV histories in [`data/`](../data), updated after the most recent appended observations:
 
-| Function | d | n | Best observed raw `y0` | Best-so-far improvement over stored run | Latest chosen strategy / origin | Stagnation flag in latest report |
-| --- | ---: | ---: | ---: | ---: | --- | --- |
-| `function_1` | 2 | 19 | `6.83e-12` | `+6.83e-12` | `global_explore` / `global` | No |
-| `function_2` | 2 | 19 | `0.651454` | `+0.112458` | `primary_pareto_sigma` / `tr` | No |
-| `function_3` | 3 | 24 | `-0.004284` | `+0.107838` | `trust_region_ts` / `tr` | Yes |
-| `function_4` | 4 | 39 | `0.608628` | `+22.716916` | `trust_region_ts` / `tr` | Yes |
-| `function_5` | 4 | 29 | `6049.023450` | `+5984.580010` | `primary_pareto_sigma` / `tr` | No |
-| `function_6` | 5 | 29 | `-0.162953` | `+0.551312` | `trust_region_ts` / `tr` | Yes |
-| `function_7` | 6 | 39 | `2.244001` | `+1.639568` | `trust_region_ts` / `tr` | Yes |
-| `function_8` | 8 | 49 | `9.920822` | `+2.522101` | `trust_region_ts` / `tr` | Yes |
+| Function | d | n | Best observed raw `y0` | Best index | Latest raw `y0` | Submissions after best | 2026-04-30 chosen origin | 2026-04-30 stagnation flag |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- |
+| `function_1` | 2 | 23 | `0.184524` | 22 | `0.184524` | 0 | `global` | No |
+| `function_2` | 2 | 23 | `0.651454` | 17 | `0.617305` | 5 | `tr` | No |
+| `function_3` | 3 | 28 | `-0.003253` | 27 | `-0.003253` | 0 | `tr` | Yes |
+| `function_4` | 4 | 43 | `0.701305` | 41 | `0.357287` | 1 | `tr` | Yes |
+| `function_5` | 4 | 33 | `8662.405001` | 31 | `8656.731627` | 1 | `global` | No |
+| `function_6` | 5 | 33 | `-0.154283` | 32 | `-0.154283` | 0 | `tr` | Yes |
+| `function_7` | 6 | 43 | `3.223213` | 39 | `3.203689` | 3 | `tr` | No |
+| `function_8` | 8 | 53 | `9.958745` | 49 | `9.940839` | 3 | `tr` | No |
 
-In summary:
+The latest raw observations improved the current best-so-far value for `function_1`, `function_3`, and `function_6`. The latest observation for `function_5` is very close to the current best but does not exceed it. The functions with active post-best submissions are now `function_2`, `function_4`, `function_5`, `function_7`, and `function_8`.
 
-- the cumulative capstone trajectory shows substantial best-so-far gains on several functions, especially `function_4`, `function_5`, and `function_8`;
-- the stored late-stage reports show the optimiser leaning heavily toward trust-region picks: in `2026-04-02-fixed-signflip`, seven of eight chosen submissions came from the trust-region pool;
-- five of eight functions were flagged as stagnating in that latest report, which is consistent with the selector shifting toward `trust_region_ts`.
+In the latest stored report folder, [`reports/2026-04-30/`](../reports/2026-04-30), all eight functions completed five successful seed runs under `robust_consensus`. The selected candidate origins were six trust-region submissions and two global submissions. Three of eight chosen submissions were marked as stagnating in that report: `function_3`, `function_4`, and `function_6`.
 
 ## Assumptions and Limitations
 
 Core assumptions include:
 
-- maximisation rather than minimisation;
-- continuous box-constrained inputs already scaled near `[0, 1)`;
-- chronological row order as a meaningful history for trust-region reconstruction;
+- maximisation rather than minimisation
+- inputs should be box-constrained within the unit box `[0, 1)`
 - surrogate smoothness that is at least approximately capturable by the chosen GP kernels and transforms.
 
 Important limitations include:
@@ -136,17 +124,14 @@ The problem is sequential, small-sample, and policy-dependent.
 
 The main modelling and decision choices are already identifiable from the code:
 
-- which transforms are used;
-- how candidates are generated;
-- how the selector switches under stagnation;
-- which diagnostics are logged.
-
-What the repository does **not** provide is an exact command log, git revision, or full per-round provenance. 
+- which transforms are used
+- how candidates are generated
+- how the selector switches under stagnation
+- which diagnostics are logged
 
 The main documentation gaps are:
 
-- no git hash or formal version tag in this workspace copy;
-- no exact ten-round manifest;
+- no exact ten-round manifest.
 
 ## Reproducibility Notes
 

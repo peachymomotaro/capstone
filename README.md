@@ -4,11 +4,16 @@
 
 The repository is set up for a sequential weekly workflow rather than a one-off benchmark run. The raw data in [`data/`](data) are the running history for eight functions, and the code in this folder rebuilds candidate rankings, recommendations, diagnostics, and portal-formatted outputs from that history.
 
+## Start Here
+
+- **Model card:** [`docs/model_card_bbo_optimisation_approach.md`](docs/model_card_bbo_optimisation_approach.md) explains the optimisation method, modelling choices, performance summary, assumptions, and limitations.
+- **Dataset datasheet:** [`docs/datasheet_bbo_capstone_dataset.md`](docs/datasheet_bbo_capstone_dataset.md) documents the data files, columns, collection process, and known caveats.
+
 ## Repository At A Glance
 
 - [`data/`](data): cumulative per-function observation histories (`function_1.csv` to `function_8.csv`)
 - [`reports/`](reports): dated output folders containing candidate summaries, recommendations, portal strings, and diagnostics
-- [`docs/`](docs): project documentation, including the dataset datasheet and optimisation model card
+- [`docs/`](docs): project documentation, especially the [`model card`](docs/model_card_bbo_optimisation_approach.md) and [`dataset datasheet`](docs/datasheet_bbo_capstone_dataset.md)
 - [`weekly_pack.py`](weekly_pack.py): main orchestration script for rebuilding a weekly run
 - [`propose_next.py`](propose_next.py): lightweight entrypoint that prints one proposed portal string per function
 - [`Explainer.md`](Explainer.md): longer internal project notes and implementation guidance
@@ -28,8 +33,8 @@ The default workflow also evaluates multiple random seeds and uses a consensus r
 
 ## Documentation
 
-- [BBO Capstone Dataset Datasheet](docs/datasheet_bbo_capstone_dataset.md)
-- [BBO Optimisation Approach Model Card](docs/model_card_bbo_optimisation_approach.md)
+- [BBO Optimisation Approach Model Card](docs/model_card_bbo_optimisation_approach.md): method overview, pipeline details, performance, assumptions, and limitations.
+- [BBO Capstone Dataset Datasheet](docs/datasheet_bbo_capstone_dataset.md): data provenance, schema, intended use, and caveats.
 
 ## Typical Usage
 
