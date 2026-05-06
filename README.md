@@ -11,7 +11,7 @@ The repository is set up for a sequential weekly workflow rather than a one-off 
 - [`docs/`](docs): project documentation, including the dataset datasheet and optimisation model card
 - [`weekly_pack.py`](weekly_pack.py): main orchestration script for rebuilding a weekly run
 - [`propose_next.py`](propose_next.py): lightweight entrypoint that prints one proposed portal string per function
-- [`EXPLAINER.md`](EXPLAINER.md), [`PIPELINE_WALKTHROUGH.md`](PIPELINE_WALKTHROUGH.md), [`Handover.md`](Handover.md): longer internal project notes and implementation guidance
+- [`Explainer.md`](Explainer.md): longer internal project notes and implementation guidance
 
 ## How It Works
 
