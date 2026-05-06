@@ -1,8 +1,19 @@
 # CapstoneBO+
 
-`CapstoneBO+` is a repository for a capstone black-box optimisation workflow. It takes cumulative observations for a set of hidden objective functions, fits one surrogate model per function, proposes one new query per function, and writes report artifacts that make the recommendation process inspectable.
+`CapstoneBO+` is a repository for a capstone black-box optimisation workflow. 
 
-The repository is set up for a sequential weekly workflow rather than a one-off benchmark run. The raw data in [`data/`](data) are the running history for eight functions, and the code in this folder rebuilds candidate rankings, recommendations, diagnostics, and portal-formatted outputs from that history.
+The model is a Bayesian optimisation pipeline. For each function, it fits a Gaussian process surrogate to the observed inputs and outputs. The preferred model uses an additive linear plus Matern kernel, optional input warping, and output transformations such as Box-Cox or Yeo-Johnson when useful. The pipeline then generates candidate points from global Sobol samples, trust-region samples, and elite-region samples around historically strong areas.
+
+Candidates are scored with acquisition-style signals including expected improvement, probability of improvement, upper confidence bound, Thompson-style scores, and an exploration score based on uncertainty and novelty. A portfolio selector chooses the final weekly recommendation.
+
+The repository is set up for a sequential weekly workflow. The raw data in [`data/`](data) are the running history for eight functions, and the code in this folder rebuilds candidate rankings, recommendations, diagnostics, and portal-formatted outputs from that history.
+
+## Contact Details
+
+Prepared for a machine learning capstone submission.
+
+Get in touch via email: curry.peter@googlemail.com
+My website: https://petercurry.org/
 
 ## Start Here
 
@@ -31,11 +42,6 @@ At a high level, the pipeline:
 
 The default workflow also evaluates multiple random seeds and uses a consensus rule to choose the final portal string written to the report folder.
 
-## Documentation
-
-- [BBO Optimisation Approach Model Card](docs/model_card_bbo_optimisation_approach.md): method overview, pipeline details, performance, assumptions, and limitations.
-- [BBO Capstone Dataset Datasheet](docs/datasheet_bbo_capstone_dataset.md): data provenance, schema, intended use, and caveats.
-
 ## Typical Usage
 
 Run the full weekly rebuild and write a dated report folder:
@@ -45,6 +51,18 @@ python3 weekly_pack.py --report_date 2026-04-30
 Print one proposed portal input per function without writing a full report:
 
 python3 propose_next.py
+
+## Hyperparameter Optimisation
+
+The GP hyperparameters are fitted automatically during model training. Important configuration choices include:
+
+- kernel mode: `lin_matern32_add`;
+- output transform mode: `power`;
+- global Sobol candidates: `3072`;
+- trust-region candidates: `1024`;
+- elite-region candidates: `512`;
+- UCB beta sweep: `0.50` to `3.00`;
+- robust consensus over five random seeds.
 
 ## Report Outputs
 
