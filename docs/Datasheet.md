@@ -108,17 +108,13 @@ No ethics review, consent process, or withdrawal mechanism is documented, which 
    | `function_7` | `3.223213` | `[0.218691, 0.218479, 0.440618, 0.271435, 0.335377, 0.659655]` |
    | `function_8` | `9.958745` | `[0.107466, 0.115199, 0.129783, 0.155887, 0.772725, 0.572681, 0.124179, 0.123077]` |
 
-2. **Which input vector produced this value?**
+2. **How confident are you that this is near the global maximum? Why?**
 
-   The best input vectors are listed in the table above.
+   Confidence varies by function. It is higher where progress has plateaued after local exploration and lower where the search space is higher-dimensional or improvements have been more recent. Because the data are small and adaptively collected, these results should be treated as strong observed values rather than proven global optima.
 
-3. **How confident are you that this is near the global maximum? Why?**
+3. **Did your results align with expectations?**
 
-   Confidence varies by function. It is higher where progress has plateaued after local exploration and lower where the search space is higher-dimensional or seed-to-seed recommendations remain unstable. Because the data are small and adaptively collected, these results should be treated as strong observed values rather than proven global optima.
-
-4. **Did your results align with expectations?**
-
-   Yes in broad terms. The low-dimensional functions were easier to visualise and diagnose. Higher-dimensional functions required more reliance on surrogate uncertainty and trust-region behaviour. `function_5` stood out because the best region was near the upper boundary.
+   No. The lower-dimensional functions turned out to have complexity I didn't expect, and required more reliance on surrogate uncertainty and trust-region behaviour. Higher-dimensional functions proved easier to interpret that I thought.
 
 ## Ethical, Practical And General Considerations
 
