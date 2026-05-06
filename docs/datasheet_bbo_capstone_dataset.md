@@ -15,8 +15,6 @@ At a high level, query generation proceeds as follows:
 7. A final recommendation is selected using a portfolio-style rule, in some cases incorporating multi-seed consensus.
 8. One new point per function is submitted, and the resulting evaluations are appended when they become available.
 
-The collection strategy is therefore neither purely deterministic nor purely random. Some parts are fixed and rule-based, such as loading, rounding, and deduplication. Others are stochastic, such as Sobol candidate generation and seed-dependent exploration.
-
-The dated folders in `reports/` suggest that the process unfolded across multiple snapshots, including `2026-03-19-plus`, `2026-03-20`, `2026-04-02`, `2026-04-02-audited`, and `2026-04-02-fixed-signflip`. These folders make the sequential nature of the collection visible. However, the repository does not include a single explicit manifest mapping every observation to a clearly labelled round number, so the chronology can only be reconstructed partially from the available files.
+The collection strategy is therefore neither purely deterministic nor purely random. Some parts are fixed and rule-based, such as loading, rounding, and deduplication. Others are stochastic, such as Sobol candidate generation and seed-dependent exploration. 
 
 No ethics review, consent process, or withdrawal mechanism is documented, which is appropriate given that the dataset does not involve human participants. The more relevant issue is methodological: because later points were selected using the optimiser, the dataset is policy-dependent rather than a random sample of each search space.

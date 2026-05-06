@@ -35,21 +35,15 @@ The default workflow also evaluates multiple random seeds and uses a consensus r
 
 Run the full weekly rebuild and write a dated report folder:
 
-```bash
-python3 weekly_pack.py --report_date 2026-04-02
-```
+python3 weekly_pack.py --report_date 2026-04-30
 
 Print one proposed portal input per function without writing a full report:
 
-```bash
 python3 propose_next.py
-```
 
 If you are running from a package-aware environment, the module form also works:
 
-```bash
-python3 -m CapstoneBO+.weekly_pack --report_date 2026-04-02
-```
+python3 -m CapstoneBO+.weekly_pack --report_date 2026-04-30
 
 ## Report Outputs
 
