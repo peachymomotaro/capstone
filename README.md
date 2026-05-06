@@ -56,6 +56,7 @@ Print one proposed portal input per function without writing a full report:
 Regenerate progress and visualization artifacts:
 
 `python3 plots/plot_function_progress.py`
+
 `python3 plots/plot_function_surfaces.py`
 
 ## Hyperparameter Optimisation
