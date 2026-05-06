@@ -41,10 +41,6 @@ Print one proposed portal input per function without writing a full report:
 
 python3 propose_next.py
 
-If you are running from a package-aware environment, the module form also works:
-
-python3 -m CapstoneBO+.weekly_pack --report_date 2026-04-30
-
 ## Report Outputs
 
 Each dated folder in [`reports/`](reports) typically contains:
