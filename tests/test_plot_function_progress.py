@@ -8,7 +8,7 @@ from pathlib import Path
 import pandas as pd
 
 
-MODULE_PATH = Path(__file__).resolve().parents[1] / "plot_function_progress.py"
+MODULE_PATH = Path(__file__).resolve().parents[1] / "plots" / "plot_function_progress.py"
 SPEC = importlib.util.spec_from_file_location("plot_function_progress", MODULE_PATH)
 assert SPEC is not None and SPEC.loader is not None
 MODULE = importlib.util.module_from_spec(SPEC)

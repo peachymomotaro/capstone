@@ -3,5 +3,17 @@ __pycache__/
 .DS_Store
 .venv/
 .ipynb_checkpoints/
-reports/
-images/function_3_interactive_from_points.html
+
+# Local/generated report artifacts.
+# reports/
+
+# Local exploratory notebook; method_demo.ipynb remains at project root for presentation.
+notebooks/weekly_tables.ipynb
+
+# Generated visual outputs can be rebuilt from data and plotting scripts.
+images/*.png
+images/*.html
+images/*_summary.csv
+
+# Local scratch notes.
+Explainer.md

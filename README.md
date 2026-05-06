@@ -25,9 +25,10 @@ My website: https://petercurry.org/
 - [`data/`](data): cumulative per-function observation histories (`function_1.csv` to `function_8.csv`)
 - [`reports/`](reports): dated output folders containing candidate summaries, recommendations, portal strings, and diagnostics
 - [`docs/`](docs): project documentation, especially the [`model card`](docs/Model_Card.md) and [`dataset datasheet`](docs/Datasheet.md)
+- [`plots/`](plots): plotting and visualization scripts for progress charts, surfaces, and high-dimensional summaries
+- [`notebooks/`](notebooks): supporting exploratory notebooks
 - [`weekly_pack.py`](weekly_pack.py): main orchestration script for rebuilding a weekly run
 - [`propose_next.py`](propose_next.py): lightweight entrypoint that prints one proposed portal string per function
-- [`Explainer.md`](Explainer.md): longer internal project notes and implementation guidance
 
 ## How It Works
 
@@ -51,6 +52,12 @@ python3 weekly_pack.py --report_date 2026-04-30
 Print one proposed portal input per function without writing a full report:
 
 python3 propose_next.py
+
+Regenerate progress and visualization artifacts:
+
+python3 plots/plot_function_progress.py
+
+python3 plots/plot_function_surfaces.py
 
 ## Hyperparameter Optimisation
 

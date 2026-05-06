@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 
 
-MODULE_PATH = Path(__file__).resolve().parents[1] / "plot_function_3_from_points.py"
+MODULE_PATH = Path(__file__).resolve().parents[1] / "plots" / "plot_function_3_from_points.py"
 
 
 def _load_module():

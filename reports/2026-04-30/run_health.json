@@ -1,0 +1,71 @@
+{
+  "selection_mode": "robust_consensus",
+  "consensus_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "consensus_min_successes": 3,
+  "consensus_tie_break": "highest_mean_submission_score",
+  "seed_status": {
+    "0": {
+      "n_function_success": 8,
+      "n_function_fail": 0,
+      "warning_counts": {
+        "optimization_warning": 0,
+        "negative_variance_warning": 0,
+        "other_warning": 96
+      },
+      "failures": {}
+    },
+    "1": {
+      "n_function_success": 8,
+      "n_function_fail": 0,
+      "warning_counts": {
+        "optimization_warning": 0,
+        "negative_variance_warning": 0,
+        "other_warning": 96
+      },
+      "failures": {}
+    },
+    "2": {
+      "n_function_success": 8,
+      "n_function_fail": 0,
+      "warning_counts": {
+        "optimization_warning": 0,
+        "negative_variance_warning": 0,
+        "other_warning": 96
+      },
+      "failures": {}
+    },
+    "3": {
+      "n_function_success": 8,
+      "n_function_fail": 0,
+      "warning_counts": {
+        "optimization_warning": 0,
+        "negative_variance_warning": 0,
+        "other_warning": 96
+      },
+      "failures": {}
+    },
+    "4": {
+      "n_function_success": 8,
+      "n_function_fail": 0,
+      "warning_counts": {
+        "optimization_warning": 0,
+        "negative_variance_warning": 0,
+        "other_warning": 96
+      },
+      "failures": {}
+    }
+  },
+  "global_warning_counts": {
+    "optimization_warning": 0,
+    "negative_variance_warning": 0,
+    "other_warning": 480
+  },
+  "functions_below_min_success": [],
+  "global_function_fail_rate": 0.0
+}

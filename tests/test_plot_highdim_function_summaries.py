@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-MODULE_PATH = Path(__file__).resolve().parents[1] / "plot_highdim_function_summaries.py"
+MODULE_PATH = Path(__file__).resolve().parents[1] / "plots" / "plot_highdim_function_summaries.py"
 SPEC = importlib.util.spec_from_file_location("plot_highdim_function_summaries", MODULE_PATH)
 assert SPEC is not None and SPEC.loader is not None
 MODULE = importlib.util.module_from_spec(SPEC)

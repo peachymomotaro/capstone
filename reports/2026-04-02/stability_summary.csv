@@ -1,0 +1,9 @@
+function,n_seed_success,n_seed_fail,unique_suggestions,consensus_frequency,consensus_frequency_ratio,selected_portal_string,selected_seed,fallback_used,fit_attempt_distribution,selection_mode
+function_1,5,0,5,1,0.2,0.994292-0.991002,2,False,"{""primary"": 5}",robust_consensus
+function_2,5,0,5,1,0.2,0.715356-0.895525,1003,False,"{""primary"": 5}",robust_consensus
+function_3,5,0,5,1,0.2,0.965899-0.009053-0.807356,2004,False,"{""primary"": 5}",robust_consensus
+function_4,5,0,5,1,0.2,0.385075-0.420803-0.382508-0.392805,3004,False,"{""primary"": 5}",robust_consensus
+function_5,5,0,5,1,0.2,0.796298-0.759177-0.922926-0.993705,4001,False,"{""primary"": 5}",robust_consensus
+function_6,5,0,5,1,0.2,0.972981-0.361756-0.012917-0.002068-0.939636,5002,False,"{""primary"": 5}",robust_consensus
+function_7,5,0,5,1,0.2,0.520570-0.112413-0.519203-0.556806-0.150852-0.762438,6001,False,"{""primary"": 5}",robust_consensus
+function_8,5,0,5,1,0.2,0.046675-0.000000-0.003636-0.032291-0.984044-0.535685-0.039453-0.180790,7002,False,"{""primary"": 5}",robust_consensus
