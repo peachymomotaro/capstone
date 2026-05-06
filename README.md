@@ -6,8 +6,8 @@ The repository is set up for a sequential weekly workflow rather than a one-off 
 
 ## Start Here
 
-- **Model card:** [`docs/model_card_bbo_optimisation_approach.md`](docs/Model_Card.md) explains the optimisation method, modelling choices, performance summary, assumptions, and limitations.
-- **Dataset datasheet:** [`docs/datasheet_bbo_capstone_dataset.md`](docs/Datasheet.md) documents the data files, columns, collection process, and known caveats.
+- **Model card:** [`docs/Model_Card.md`](docs/Model_Card.md) explains the optimisation method, modelling choices, performance summary, assumptions, and limitations.
+- **Dataset datasheet:** [`docs/Datasheet.md`](docs/Datasheet.md) documents the data files, columns, collection process, and known caveats.
 
 ## Repository At A Glance
 
