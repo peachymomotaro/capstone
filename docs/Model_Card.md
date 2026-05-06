@@ -50,7 +50,6 @@ The live code path in [`weekly_pack.py`](../weekly_pack.py) runs the following p
    - `primary_pareto_sigma`;
    - `trust_region_ts`;
    - `global_explore`;
-   - `shadow_oldstyle`.
 9. Repeat across seeds `0`-`4` in robust-consensus mode and choose one final portal string per function.
 
 ### Surrogate modelling choices
