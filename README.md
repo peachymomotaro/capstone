@@ -6,14 +6,14 @@ The repository is set up for a sequential weekly workflow rather than a one-off 
 
 ## Start Here
 
-- **Model card:** [`docs/model_card_bbo_optimisation_approach.md`](docs/model_card_bbo_optimisation_approach.md) explains the optimisation method, modelling choices, performance summary, assumptions, and limitations.
-- **Dataset datasheet:** [`docs/datasheet_bbo_capstone_dataset.md`](docs/datasheet_bbo_capstone_dataset.md) documents the data files, columns, collection process, and known caveats.
+- **Model card:** [`docs/model_card_bbo_optimisation_approach.md`](docs/Model_Card.md) explains the optimisation method, modelling choices, performance summary, assumptions, and limitations.
+- **Dataset datasheet:** [`docs/datasheet_bbo_capstone_dataset.md`](docs/Datasheet.md) documents the data files, columns, collection process, and known caveats.
 
 ## Repository At A Glance
 
 - [`data/`](data): cumulative per-function observation histories (`function_1.csv` to `function_8.csv`)
 - [`reports/`](reports): dated output folders containing candidate summaries, recommendations, portal strings, and diagnostics
-- [`docs/`](docs): project documentation, especially the [`model card`](docs/model_card_bbo_optimisation_approach.md) and [`dataset datasheet`](docs/datasheet_bbo_capstone_dataset.md)
+- [`docs/`](docs): project documentation, especially the [`model card`](docs/Model_Card.md) and [`dataset datasheet`](docs/Datasheet.md)
 - [`weekly_pack.py`](weekly_pack.py): main orchestration script for rebuilding a weekly run
 - [`propose_next.py`](propose_next.py): lightweight entrypoint that prints one proposed portal string per function
 - [`Explainer.md`](Explainer.md): longer internal project notes and implementation guidance
