@@ -6,9 +6,7 @@
 
 **Type.** Sequential surrogate-based optimiser for continuous box-constrained black-box functions.
 
-**Version label used here.** This model card describes the live `CapstoneBO+` code in [`config.py`](../config.py), [`weekly_pack.py`](../weekly_pack.py), and related modules, together with the stored report variants through [`reports/2026-04-02-fixed-signflip/`](../reports/2026-04-02-fixed-signflip). No git revision is available in this workspace copy, so the dated report folders are the most concrete revision markers.
-
-**Short summary.** CapstoneBO+ fits one Gaussian process per function, transforms outputs when helpful, optionally warps inputs, generates a mixed candidate pool from global, trust-region, and elite regions, scores those candidates with multiple acquisition signals, removes portal-rounding duplicates, and chooses one weekly submission per function through a small portfolio of decision rules. In the default workflow it repeats that process across five seeds and reports a consensus portal string.
+**Short summary.** CapstoneBO+ fits one Gaussian process per function, transforms outputs when helpful, optionally warps inputs, generates a mixed candidate pool from global, trust-region, and elite regions, scores those candidates with multiple acquisition signals, removes portal-rounding duplicates, and chooses one weekly submission per function through a small portfolio of decision rules.
 
 ## Intended Use
 
@@ -37,7 +35,7 @@ The live code path in [`weekly_pack.py`](../weekly_pack.py) runs the following p
 4. Reconstruct a trust region from the historical sequence with [`candidates/trust_region.py`](../candidates/trust_region.py).
 5. Build a mixed candidate pool with [`candidates/pool.py`](../candidates/pool.py):
    - `3072` global Sobol points by default;
-   - `1024` trust-region Sobol points if trust-region mode is enabled;
+   - `1024` trust-region Sobol points;
    - `512` elite-region Sobol points from a box around the top `20%` observed points.
 6. Score every candidate in [`acquisition/scores.py`](../acquisition/scores.py) using:
    - posterior mean and standard deviation in transformed space;
@@ -63,7 +61,7 @@ The preferred path is:
 
 ### Selection logic and exploration/exploitation trade-off
 
-The primary selector still reflects my older CapstoneBO philosophy. This involves computing a Pareto front over `(-EI, -PI, -UCB)`, apply a sigma quantile gate that becomes less strict with more observations, then tie-break by posterior mean. That is the `primary_pareto_sigma` branch.
+The primary selector still reflects my older CapstoneBO philosophy. This involved computing a Pareto frontier over `(-EI, -PI, -UCB)`, applying a sigma quantile gate that becomes less strict with more observations, then tie-breaking by posterior mean. That is the `primary_pareto_sigma` branch.
 
 CapstoneBO+ includes two important alternatives:
 
@@ -113,11 +111,7 @@ Important limitations include:
 
 ## Ethical Considerations
 
-This is not a human-subject model card, so the most relevant ethical issues are transparency, reproducibility, and responsible claims.
-
-This repository stores candidate-level tables, named recommendation strategies, and seed-level summaries.
-
-The problem is sequential, small-sample, and policy-dependent.
+This model card applies to fictional data, so any ethical issues are mainly around transparency.
 
 ## Why This Level of Detail Is Sufficient
 
