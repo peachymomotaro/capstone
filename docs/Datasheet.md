@@ -1,6 +1,6 @@
 ## High-Level Overview
 
-The dataset was collected through an iterative weekly optimisation process rather than through a single batch collection stage. In each round, the existing observations were used to fit a surrogate model, generate candidate points, score those candidates under several acquisition and heuristic criteria, and select one portal-ready submission per function. Once new evaluations became available, they were appended to the relevant per-function CSV files and the process repeated.
+The dataset was collected through an iterative weekly optimisation process rather than through a single batch collection stage. In each round, the existing observations were used to fit a surrogate model, generate candidate points, score those candidates under several acquisition and heuristic criteria, and select one submission per function. Once new evaluations became available, they were appended to the relevant per-function CSV files.
 
 The collection process is therefore adaptive. The dataset grows in response to earlier observations and earlier modelling decisions.
 
@@ -8,16 +8,16 @@ At a high level, query generation proceeds as follows:
 
 1. The existing observation history for one function is loaded.
 2. A Gaussian process surrogate is fit, with optional output transformation and optional input warping.
-3. A trust region is reconstructed from the historical sequence.
-4. A mixed candidate pool is generated, including global Sobol points, trust-region Sobol points, and local samples around strong previously observed regions.
-5. Candidates are scored using several criteria, including expected improvement, log expected improvement, probability of improvement, upper confidence bound sweeps, Thompson-style scores, and exploration-oriented scores combining novelty and uncertainty.
+3. A trust region is constructed based on strong points. 
+4. A mixed candidate pool is generated, including global Sobol points and trust-region Sobol points (i.e. local samples around strong previously observed regions).
+5. Candidates are scored using several criteria, including expected improvement, log expected improvement, probability of improvement, upper confidence bound sweeps (i.e. using several different values of beta in UCB), and exploration strategies combining novelty and uncertainty.
 6. Duplicates are removed after six-decimal floor rounding, including points that would collide with already observed locations.
-7. A final recommendation is selected using a portfolio-style rule, in some cases incorporating multi-seed consensus.
-8. One new point per function is submitted, and the resulting evaluations are appended when they become available.
+7. A final recommendation is selected using a portfolio-style rule.
+8. The user selects one new point per function, and the resulting evaluations are appended when they become available.
 
 The collection strategy is therefore neither purely deterministic nor purely random. Some parts are fixed and rule-based, such as loading, rounding, and deduplication. Others are stochastic, such as Sobol candidate generation and seed-dependent exploration. 
 
-No ethics review, consent process, or withdrawal mechanism is documented, which is appropriate given that the dataset does not involve human participants. The more relevant issue is methodological: because later points were selected using the optimiser, the dataset is policy-dependent rather than a random sample of each search space.
+No ethics review, consent process, or withdrawal mechanism is documented, which is appropriate given that the dataset does not involve human participants.
 
 ### Data Breakdown
 
@@ -132,4 +132,4 @@ No ethics review, consent process, or withdrawal mechanism is documented, which 
 
 4. **What risks or pitfalls should a future user be aware of?**
 
-   Key risks include allowing visualising data to warp the way you think about the landscape. Matplotlib visualisations can only from the data that they have and new points can drastically change the shape of the landscape. 
+   Key risks include allowing visualising data to warp the way you think about the landscape. Matplotlib visualisations can only build from the data that they have and new points can drastically change the shape of the landscape. 
