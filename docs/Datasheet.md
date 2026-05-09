@@ -124,12 +124,12 @@ No ethics review, consent process, or withdrawal mechanism is documented, which 
 
 2. **What limitations arise from the synthetic nature of the function?**
 
-   The hidden functions do not include real-world constraints, measurement costs, safety issues, or human consequences. 
+   The hidden functions do not include real-world constraints, measurement costs, or safety issues.
 
 3. **Would your strategy scale to more serious or more expensive problems? Why or why not?**
 
-   The strategy would scale conceptually to expensive continuous optimisation, but it would need stronger provenance logging, cost-aware acquisition, and careful validation before use in a serious domain.
+   The strategy would scale conceptually to expensive continuous optimisation, but it would need cost-aware acquisition and careful validation before use in a serious domain.
 
 4. **What risks or pitfalls should a future user be aware of?**
 
-   Key risks include overclaiming global optimality, trusting transformed-space scores without checking raw `y0`, ignoring seed instability, and allowing data-label errors to affect plots or filtered analyses.
+   Key risks include allowing visualising data to warp the way you think about the landscape. Matplotlib visualisations can only from the data that they have and new points can drastically change the shape of the landscape. 
