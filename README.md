@@ -35,11 +35,11 @@ My website: https://petercurry.org/
 At a high level, the pipeline:
 
 1. loads the current history for each function from `data/`
-2. fits a Gaussian-process-based surrogate model with repository-specific transforms and robustness fallbacks
+2. fits a Gaussian-process-based surrogate model
 3. generates a candidate pool from global, trust-region, and elite-region proposals
 4. scores candidates with multiple acquisition-style signals
-5. removes portal-rounding duplicates and previously observed rounded points
-6. chooses one final submission candidate per function and writes report outputs
+5. removes portal-rounding duplicates
+6. chooses one final submission candidate per function (and allows the user to choose from a list of potential submissions!)
 
 The default workflow also evaluates multiple random seeds and uses a consensus rule to choose the final portal string written to the report folder.
 
