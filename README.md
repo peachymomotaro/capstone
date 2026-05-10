@@ -2,15 +2,15 @@
 
 `CapstoneBO+` is a repository for a capstone black-box optimisation workflow. 
 
-The model is a Bayesian optimisation pipeline. For each function, it fits a Gaussian process surrogate to the observed inputs and outputs. The preferred model uses an additive linear plus Matern kernel, optional input warping, and output transformations such as Box-Cox or Yeo-Johnson when useful. The pipeline then generates candidate points from global Sobol samples, trust-region samples, and elite-region samples around historically strong areas.
+The model is a Bayesian optimisation pipeline. For each function, it fits a Gaussian process surrogate to the observed inputs and outputs. The main model uses an additive linear plus Matern kernel with some input warping and output transformations such as Box-Cox or Yeo-Johnson when the search space seems to warrant it. The pipeline then generates candidate points from global Sobol samples, trust-region samples, and elite-region samples around historically strong areas.
 
-Candidates are scored with acquisition-style signals including expected improvement, probability of improvement, upper confidence bound, Thompson-style scores, and an exploration score based on uncertainty and novelty. A portfolio selector chooses the final weekly recommendation.
+Candidates are scored with acquisition-style signals including expected improvement (EI), probability of improvement (PI), upper confidence bound (UCB), Thompson-style scores, and an exploration score based on novelty. A portfolio selector allows the user to choose the final weekly recommendation.
 
 The repository is set up for a sequential weekly workflow. The raw data in [`data/`](data) are the running history for eight functions, and the code in this folder rebuilds candidate rankings, recommendations, diagnostics, and portal-formatted outputs from that history.
 
 ## Contact Details
 
-Prepared for a machine learning capstone submission.
+Prepared for the Imperial College Machine Learning course.
 
 Get in touch via email: curry.peter@googlemail.com
 My website: https://petercurry.org/
